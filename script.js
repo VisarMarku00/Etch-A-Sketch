@@ -2,6 +2,7 @@
 let sketchPad = document.getElementById("sketch-pad");
 let gridSize;
 createGrid();
+
 //make a function to select the grid size of the function
 let gridSlider = document.querySelector("#grid-size-selector");
 gridSlider.addEventListener("input", (event) => {
@@ -18,7 +19,6 @@ function createGrid(gridSize) {
     pixel.setAttribute("class", "pixel");
     sketchPad.appendChild(pixel);
   }
-  //console.log(gridSize);
 }
 
 //make a function to clear the sketchpad

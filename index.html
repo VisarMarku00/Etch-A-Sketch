@@ -10,15 +10,18 @@
 
 <body>
     <header>Etch-A-Sketch</header>
-    <div id="sketch-pad-options">
-        <button class="change-sketch-pad">Clear</button>
-        <div class="slider-components">
-            <p>Grid size: <output id="value"></output></p>
-            <input type="range" min="16" max="64" value="16" class="slider" id="grid-size-selector">
-          </div>
+    <div id="main-content">
+        <div id="sketch-pad-options">
+            <button class="change-sketch-pad">Clear</button>
+            <div class="slider-components">
+                <p>Grid size: <output id="value"></output></p>
+                <input type="range" min="16" max="64" value="16" class="slider" id="grid-size-selector">
+            </div>
+        </div>
+        <div id="sketch-pad"></div>
     </div>
-    <div id="sketch-pad"></div>
     <footer>Visar Marku</footer>
 </body>
 <script src="./script.js"></script>
+
 </html>
