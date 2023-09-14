@@ -2,17 +2,18 @@ body {
   display: flex;
   flex-direction: column;
   font-family: "Courier New", Courier, monospace;
+  min-height: 100vh;
+  margin: 0px 0.5rem;
 }
 
 header {
-  text-align: center;
   padding: 2em;
   font-size: x-large;
 }
 #main-content {
   display: flex;
   justify-content: center;
-  gap: 20rem;
+  gap: 10rem;
 }
 
 #sketch-pad-options {
@@ -21,13 +22,16 @@ header {
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  margin: 0rem 0rem 0rem 5rem;
 }
 .change-sketch-pad {
   padding: 1rem 2rem;
   font-size: larger;
   border-radius: 0.7rem;
   border: 0.2rem solid rgb(85, 79, 79);
+}
+.slider-components{
+    display: flex;
+    flex-direction: column;
 }
 
 #sketch-pad {
@@ -48,5 +52,7 @@ header {
 }
 
 footer {
-  text-align: center;
+  margin-top: auto;
+  text-align: end;
+  padding: 2rem;
 }

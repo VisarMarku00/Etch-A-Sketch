@@ -6,10 +6,13 @@ let padBackGroundColor;
 createGrid();
 
 //make a function to select the grid size of the function
+let selectorValue = document.querySelector("#value");
 let gridSlider = document.querySelector("#grid-size-selector");
+value.textContent = `${gridSlider.value} x ${gridSlider.value}`;
 gridSlider.addEventListener("input", (event) => {
   cleanSketchPad();
   gridSize = event.target.value;
+  value.textContent = `${gridSize} x ${gridSize}`;
   createGrid(gridSize);
 });
 
