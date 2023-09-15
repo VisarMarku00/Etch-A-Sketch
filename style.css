@@ -23,15 +23,27 @@ header {
   align-items: center;
   gap: 2rem;
 }
+
+#color-selectors {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .change-sketch-pad {
   padding: 1rem 2rem;
   font-size: larger;
   border-radius: 0.7rem;
   border: 0.2rem solid rgb(85, 79, 79);
 }
-.slider-components{
-    display: flex;
-    flex-direction: column;
+
+input[type="range"] {
+  accent-color: rgb(85, 79, 79);
+}
+
+.slider-components {
+  display: flex;
+  flex-direction: column;
 }
 
 #sketch-pad {

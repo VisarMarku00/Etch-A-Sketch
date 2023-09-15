@@ -12,8 +12,16 @@
     <header>Etch-A-Sketch</header>
     <div id="main-content">
         <div id="sketch-pad-options">
-            <!-- Add color picker for brush -->
-            <!-- Add color picker for sketchpad backround -->
+            <div id="color-selectors">
+                <div>
+                    <input type="color" id="brush-color" name="brush-color" value="#e66465" />
+                    <label for="brush-color">Brush color</label>
+                </div>
+                <div>
+                    <input type="color" id="background-color" name="background-color" value="#FFFFFF" />
+                    <label for="background-color">Background Color</label>
+                </div>
+            </div>
             <button class="change-sketch-pad">Clear</button>
             <button class="change-sketch-pad">Eraser</button>
             <button class="change-sketch-pad">Rainbow brush</button>
