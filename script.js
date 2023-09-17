@@ -185,17 +185,17 @@ function generateColor() {
 }
 
 
-// function buttonAction(lastButtonUsed, currentButton, prevColor){
-//   if (currentButton.value == "OFF") {
-//     if (lastButtonUsed != null)
-//       turnOfOtherButtons(prevColor, lastButtonUsed);
-//     brushColor = padBackgroundColor;
-//     currentButton.style.backgroundColor = "#cdc6c4";
-//     currentButton.value = "ON";
-//     lastButtonUsed = currentButton;
-//   } else {
-//     currentButton.value = "OFF";
-//     currentButton.style.backgroundColor = "buttonface";
-//     brushColor = prevColor;
-//   }
-// }
+function buttonAction(lastButtonUsed, currentButton, prevColor){
+  if (currentButton.value == "OFF") {
+    if (lastButtonUsed != null)
+      turnOfOtherButtons(prevColor, lastButtonUsed);
+    brushColor = padBackgroundColor;
+    currentButton.style.backgroundColor = "#cdc6c4";
+    currentButton.value = "ON";
+    lastButtonUsed = currentButton;
+  } else {
+    currentButton.value = "OFF";
+    currentButton.style.backgroundColor = "buttonface";
+    brushColor = prevColor;
+  }
+}
