@@ -10,7 +10,12 @@ let lighter = document.getElementById("lighter");
 let lastButtonUsed;
 let buttons = document.querySelectorAll(".change-sketch-pad");
 createGrid();
-const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`
+const rgb2hex = (rgb) =>
+  `#${rgb
+    .match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/)
+    .slice(1)
+    .map((n) => parseInt(n, 10).toString(16).padStart(2, "0"))
+    .join("")}`;
 
 let buttonInUse = document.querySelector("button");
 
@@ -68,13 +73,19 @@ function createGrid(gridSize) {
   let pixels = document.querySelectorAll(".pixel");
   pixels.forEach((pixel) => {
     pixel.addEventListener("mouseover", () => {
-      if(buttonInUse.id == "rainbow-brush" && buttonInUse.value == "ON"){
+      if (buttonInUse.id == "rainbow-brush" && buttonInUse.value == "ON") {
         pixel.style.backgroundColor = generateColor();
-      } else if(buttonInUse.id == "shader" && buttonInUse.value == "ON"){
-        pixel.style.backgroundColor = ColorLuminance(rgb2hex(pixel.style.backgroundColor), -0.1);
-      }else if(buttonInUse.id == "lighter" && buttonInUse.value == "ON"){
-        pixel.style.backgroundColor = ColorLuminance(rgb2hex(pixel.style.backgroundColor), 0.1);
-      }else{
+      } else if (buttonInUse.id == "shader" && buttonInUse.value == "ON") {
+        pixel.style.backgroundColor = ColorLuminance(
+          rgb2hex(pixel.style.backgroundColor),
+          -0.1
+        );
+      } else if (buttonInUse.id == "lighter" && buttonInUse.value == "ON") {
+        pixel.style.backgroundColor = ColorLuminance(
+          rgb2hex(pixel.style.backgroundColor),
+          0.1
+        );
+      } else {
         pixel.style.backgroundColor = brushColor;
       }
     });
@@ -112,24 +123,23 @@ buttons.forEach((currentButton) => {
       }
     }
     if (currentButton.id == "rainbow-brush") {
-      buttonAction(lastButtonUsed,currentButton,prevColor)
+      buttonAction(lastButtonUsed, currentButton, prevColor);
       buttonInUse = currentButton;
     }
     if (currentButton.id == "shader") {
-      buttonAction(lastButtonUsed,currentButton,prevColor)
+      buttonAction(lastButtonUsed, currentButton, prevColor);
       buttonInUse = currentButton;
     }
     if (currentButton.id == "lighter") {
-      buttonAction(lastButtonUsed,currentButton,prevColor)
+      buttonAction(lastButtonUsed, currentButton, prevColor);
       buttonInUse = currentButton;
     }
   });
 });
 
-function buttonAction(lastButtonUsed, currentButton, prevColor){
+function buttonAction(lastButtonUsed, currentButton, prevColor) {
   if (currentButton.value == "OFF") {
-    if (lastButtonUsed != null)
-      turnOfOtherButtons(prevColor, lastButtonUsed);
+    if (lastButtonUsed != null) turnOfOtherButtons(prevColor, lastButtonUsed);
     brushColor = padBackgroundColor;
     currentButton.style.backgroundColor = "#cdc6c4";
     currentButton.value = "ON";
@@ -137,7 +147,7 @@ function buttonAction(lastButtonUsed, currentButton, prevColor){
   } else {
     currentButton.value = "OFF";
     currentButton.style.backgroundColor = "buttonface";
-    brushColor=prevColor;
+    brushColor = prevColor;
   }
 }
 
@@ -149,23 +159,24 @@ function turnOfOtherButtons(prevColor, lastButtonUsed) {
 }
 
 function ColorLuminance(hex, lum) {
+  // validate hex string
+  hex = String(hex).replace(/[^0-9a-f]/gi, "");
+  if (hex.length < 6) {
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+  }
+  lum = lum || 0;
 
-	// validate hex string
-	hex = String(hex).replace(/[^0-9a-f]/gi, '');
-	if (hex.length < 6) {
-		hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
-	}
-	lum = lum || 0;
+  // convert to decimal and change luminosity
+  var rgb = "#",
+    c,
+    i;
+  for (i = 0; i < 3; i++) {
+    c = parseInt(hex.substr(i * 2, 2), 16);
+    c = Math.round(Math.min(Math.max(0, c + c * lum), 255)).toString(16);
+    rgb += ("00" + c).substr(c.length);
+  }
 
-	// convert to decimal and change luminosity
-	var rgb = "#", c, i;
-	for (i = 0; i < 3; i++) {
-		c = parseInt(hex.substr(i*2,2), 16);
-		c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
-		rgb += ("00"+c).substr(c.length);
-	}
-
-	return rgb;
+  return rgb;
 }
 
 function generateColor() {
