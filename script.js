@@ -12,6 +12,8 @@ let buttons = document.querySelectorAll(".change-sketch-pad");
 createGrid();
 const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`
 
+let buttonInUse = document.querySelector("button");
+
 //make a function to select the grid size of the function
 let selectorValue = document.querySelector("#value");
 let gridSlider = document.querySelector("#grid-size-selector");
@@ -66,11 +68,11 @@ function createGrid(gridSize) {
   let pixels = document.querySelectorAll(".pixel");
   pixels.forEach((pixel) => {
     pixel.addEventListener("mouseover", () => {
-      if(rainbow.value == "ON"){
+      if(buttonInUse.id == "rainbow-brush" && buttonInUse.value == "ON"){
         pixel.style.backgroundColor = generateColor();
-      } else if(shader.value == "ON"){
+      } else if(buttonInUse.id == "shader" && buttonInUse.value == "ON"){
         pixel.style.backgroundColor = ColorLuminance(rgb2hex(pixel.style.backgroundColor), -0.1);
-      }else if(lighter.value == "ON"){
+      }else if(buttonInUse.id == "lighter" && buttonInUse.value == "ON"){
         pixel.style.backgroundColor = ColorLuminance(rgb2hex(pixel.style.backgroundColor), 0.1);
       }else{
         pixel.style.backgroundColor = brushColor;
@@ -110,43 +112,34 @@ buttons.forEach((currentButton) => {
       }
     }
     if (currentButton.id == "rainbow-brush") {
-      if (currentButton.value == "OFF") {
-        if (lastButtonUsed != null)
-          turnOfOtherButtons(prevColor, lastButtonUsed);
-        rainbow.style.backgroundColor = "#cdc6c4";
-        rainbow.value = "ON";
-        lastButtonUsed = currentButton;
-      } else {
-        rainbow.value = "OFF";
-        rainbow.style.backgroundColor = "buttonface";
-      }
+      buttonAction(lastButtonUsed,currentButton,prevColor)
+      buttonInUse = currentButton;
     }
     if (currentButton.id == "shader") {
-      if (currentButton.value == "OFF") {
-        if (lastButtonUsed != null)
-          turnOfOtherButtons(prevColor, lastButtonUsed);
-        shader.style.backgroundColor = "#cdc6c4";
-        shader.value = "ON";
-        lastButtonUsed = currentButton;
-      } else {
-        shader.value = "OFF";
-        shader.style.backgroundColor = "buttonface";
-      }
+      buttonAction(lastButtonUsed,currentButton,prevColor)
+      buttonInUse = currentButton;
     }
     if (currentButton.id == "lighter") {
-      if (currentButton.value == "OFF") {
-        if (lastButtonUsed != null)
-          turnOfOtherButtons(prevColor, lastButtonUsed);
-        lighter.style.backgroundColor = "#cdc6c4";
-        lighter.value = "ON";
-        lastButtonUsed = currentButton;
-      } else {
-        lighter.value = "OFF";
-        lighter.style.backgroundColor = "buttonface";
-      }
+      buttonAction(lastButtonUsed,currentButton,prevColor)
+      buttonInUse = currentButton;
     }
   });
 });
+
+function buttonAction(lastButtonUsed, currentButton, prevColor){
+  if (currentButton.value == "OFF") {
+    if (lastButtonUsed != null)
+      turnOfOtherButtons(prevColor, lastButtonUsed);
+    brushColor = padBackgroundColor;
+    currentButton.style.backgroundColor = "#cdc6c4";
+    currentButton.value = "ON";
+    lastButtonUsed = currentButton;
+  } else {
+    currentButton.value = "OFF";
+    currentButton.style.backgroundColor = "buttonface";
+    brushColor=prevColor;
+  }
+}
 
 function turnOfOtherButtons(prevColor, lastButtonUsed) {
   let button = lastButtonUsed;
@@ -182,20 +175,4 @@ function generateColor() {
     code += hexArray[Math.floor(Math.random() * 16)];
   }
   return `#${code}`;
-}
-
-
-function buttonAction(lastButtonUsed, currentButton, prevColor){
-  if (currentButton.value == "OFF") {
-    if (lastButtonUsed != null)
-      turnOfOtherButtons(prevColor, lastButtonUsed);
-    brushColor = padBackgroundColor;
-    currentButton.style.backgroundColor = "#cdc6c4";
-    currentButton.value = "ON";
-    lastButtonUsed = currentButton;
-  } else {
-    currentButton.value = "OFF";
-    currentButton.style.backgroundColor = "buttonface";
-    brushColor = prevColor;
-  }
 }
