@@ -35,6 +35,14 @@ header {
   font-size: larger;
   border-radius: 0.7rem;
   border: 0.2rem solid rgb(85, 79, 79);
+  box-shadow: 0rem 0.2rem 0.4rem rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.change-sketch-pad:active {
+  top: 1rem;
+  left: 0.5rem;
+  box-shadow: none;
 }
 
 input[type="range"] {

@@ -22,11 +22,11 @@
                     <label for="background-color">Background Color</label>
                 </div>
             </div>
-            <button class="change-sketch-pad">Clear</button>
-            <button class="change-sketch-pad">Eraser</button>
-            <button class="change-sketch-pad">Rainbow brush</button>
-            <button class="change-sketch-pad">Add shading</button>
-            <button class="change-sketch-pad">Add lightening</button>
+            <button id="clear-pad">Clear</button>
+            <button class="change-sketch-pad" id="eraser" value="OFF">Eraser</button>
+            <button class="change-sketch-pad" id="rainbow-brush" value="OFF">Rainbow brush</button>
+            <button class="change-sketch-pad" id="shader" value="OFF">Add shading</button>
+            <button class="change-sketch-pad" id="lighter" value="OFF">Add lightening</button>
             <div class="slider-components">
                 <p>Grid size: <output id="value"></output></p>
                 <input type="range" min="16" max="64" value="16" class="slider" id="grid-size-selector">
